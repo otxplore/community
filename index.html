@@ -1,0 +1,1019 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11120f">
+  <meta name="description" content="OTXS Travel Community — share travel stories, route tips, destinations and companion requests.">
+  <title>OTXS Travel Community | Discover and Explore</title>
+
+  <style>
+    :root {
+      --bg: #11120f;
+      --panel: #1b1d18;
+      --panel2: #24261f;
+      --text: #f5f3eb;
+      --muted: #a5a798;
+      --orange: #ff9f32;
+      --yellow: #ffd166;
+      --border: #34362d;
+      --green: #9bd7a4;
+      --red: #ff8585;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: var(--yellow); text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+
+    button, .btn {
+      border: 1px solid var(--border);
+      background: var(--panel2);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+    }
+
+    button:hover, .btn:hover { border-color: var(--orange); }
+
+    button.primary, .btn.primary {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: #18150e;
+      font-weight: 700;
+    }
+
+    button.danger { color: var(--red); }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(17,18,15,.96);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      max-width: 1180px;
+      margin: auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      color: var(--text);
+      font-size: 1.35rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .brand span { color: var(--orange); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a { color: var(--muted); font-size: .9rem; }
+    .nav-links a:hover { color: var(--yellow); }
+
+    select, input, textarea {
+      width: 100%;
+      min-width: 0;
+      background: #12130f;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 12px;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--orange);
+    }
+
+    main {
+      max-width: 1180px;
+      margin: auto;
+      padding: 28px 20px 55px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      align-items: center;
+      gap: 24px;
+      padding: 22px 0 30px;
+    }
+
+    .eyebrow {
+      color: var(--orange);
+      text-transform: uppercase;
+      font-size: .78rem;
+      letter-spacing: 2px;
+      font-weight: 800;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.12;
+      margin: 12px 0;
+    }
+
+    h1 span { color: var(--yellow); }
+
+    .muted { color: var(--muted); }
+
+    .hero-card {
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(140deg, #29271c, #1b1d18);
+    }
+
+    .hero-card strong {
+      display: block;
+      color: var(--yellow);
+      font-size: 2.2rem;
+      line-height: 1.3;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .stat {
+      background: var(--panel2);
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .stat strong { display: block; font-size: 1.3rem; }
+    .stat span { font-size: .8rem; color: var(--muted); }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 28px 0 14px;
+    }
+
+    h2 { margin: 0; font-size: 1.4rem; }
+    h3 { margin: 0 0 8px; }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    label { color: var(--muted); font-size: .9rem; }
+
+    textarea { min-height: 140px; resize: vertical; }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .community-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 290px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .posts {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .post {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      min-width: 0;
+    }
+
+    .post:hover { border-color: #5a5035; }
+
+    .post-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .post-title {
+      font-size: 1.2rem;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+    }
+
+    .post-icon {
+      font-size: 1.6rem;
+      background: var(--panel2);
+      border-radius: 12px;
+      min-width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #37301e;
+      color: var(--yellow);
+      border-radius: 999px;
+      padding: 4px 9px;
+      font-size: .75rem;
+      margin-bottom: 8px;
+    }
+
+    .post-meta {
+      color: var(--muted);
+      font-size: .84rem;
+      margin: 8px 0;
+      overflow-wrap: anywhere;
+    }
+
+    .post-body {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      color: #deded4;
+      margin: 14px 0;
+    }
+
+    .post-location {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .post-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .post-actions button, .post-actions a {
+      font-size: .85rem;
+    }
+
+    .sidebar {
+      display: grid;
+      gap: 14px;
+    }
+
+    .sidebar-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .category-link {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .category-link:last-child { border-bottom: 0; }
+    .category-link span:last-child { color: var(--muted); }
+
+    .empty {
+      padding: 38px 20px;
+      border: 1px dashed var(--border);
+      border-radius: 16px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .notice {
+      border: 1px solid #65502b;
+      background: #242015;
+      color: #e9d9b5;
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: .9rem;
+      margin-top: 20px;
+    }
+
+    .notice.warning {
+      border-color: #6a3838;
+      background: #281919;
+      color: #ffd0c8;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 24px 16px;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    #toast {
+      position: fixed;
+      display: none;
+      z-index: 50;
+      bottom: 20px;
+      right: 20px;
+      background: var(--yellow);
+      color: #19160d;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-weight: 700;
+      max-width: calc(100% - 40px);
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .community-layout { grid-template-columns: 1fr; }
+      .sidebar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 600px) {
+      .nav { align-items: flex-start; flex-direction: column; }
+      main { padding: 20px 14px 40px; }
+      .form-grid, .filters, .sidebar { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+      .panel, .post { padding: 15px; }
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <nav class="nav">
+    <a class="brand" href="https://home.otxs.de">OTX<span>S</span></a>
+    <div class="nav-links">
+      <a href="https://home.otxs.de">Home</a>
+      <a href="https://trave.otxs.de">Travel</a>
+      <a href="https://adventure.otxs.de">Adventure</a>
+      <a href="https://stays.otxs.de">Stays</a>
+      <a href="https://ride-companion.otxs.de">Ride Companion</a>
+      <select id="appNav" aria-label="Explore OTXS apps" style="width:auto;max-width:180px">
+        <option value="">Explore apps…</option>
+        <option value="https://apps.otxs.de">All apps</option>
+        <option value="https://explore.otxs.de">Destination Explorer</option>
+        <option value="https://planner.otxs.de">Trip Planner</option>
+        <option value="https://local.otxs.de">Local Guide</option>
+        <option value="https://safety.otxs.de">Ride Safety</option>
+        <option value="https://roads.otxs.de">Road Conditions</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div>
+      <div class="eyebrow">OTXS · Travel Community</div>
+      <h1>Travel stories.<br><span>Shared discoveries.</span></h1>
+      <p class="muted">
+        Create a travel journal entry, share route tips, ask a question or
+        draft a companion request. Keep your discoveries organised in one place.
+      </p>
+      <a class="btn primary" href="#create-post">＋ Create a post</a>
+    </div>
+
+    <div class="hero-card">
+      <div class="eyebrow">Your community board</div>
+      <strong id="postCount">0 posts</strong>
+      <span class="muted">A local prototype for your future travel community.</span>
+      <div class="stats">
+        <div class="stat"><strong id="storyCount">0</strong><span>Stories</span></div>
+        <div class="stat"><strong id="tipCount">0</strong><span>Route tips</span></div>
+        <div class="stat"><strong id="companionCount">0</strong><span>Companion posts</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="create-post">
+    <div class="section-heading" style="margin-top:0">
+      <h2 id="formHeading">Create a community post</h2>
+      <span class="muted">Write your own travel update</span>
+    </div>
+
+    <form id="postForm">
+      <input type="hidden" id="postId">
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="postTitle">Post title *</label>
+          <input id="postTitle" required maxlength="120"
+                 placeholder="e.g. A beautiful weekend around Chail">
+        </div>
+
+        <div class="field">
+          <label for="postType">Post type *</label>
+          <select id="postType" required>
+            <option value="Trip Report">Trip Report</option>
+            <option value="Route Tip">Route Tip</option>
+            <option value="Destination">Destination Recommendation</option>
+            <option value="Question">Travel Question</option>
+            <option value="Companion Request">Travel / Ride Companion Request</option>
+            <option value="Travel Advice">Travel Advice</option>
+            <option value="Accommodation">Accommodation Recommendation</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="postDestination">Destination / area *</label>
+          <input id="postDestination" required maxlength="150"
+                 placeholder="e.g. Solan, Himachal Pradesh">
+        </div>
+
+        <div class="field">
+          <label for="postTravelStyle">Travel style</label>
+          <select id="postTravelStyle">
+            <option value="Any">Any</option>
+            <option value="Motorcycle">Motorcycle</option>
+            <option value="Car">Car</option>
+            <option value="Public Transport">Public transport</option>
+            <option value="Walking / Hiking">Walking / Hiking</option>
+            <option value="Backpacking">Backpacking</option>
+            <option value="Family Travel">Family travel</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="postDate">Travel date (optional)</label>
+          <input id="postDate" type="date">
+        </div>
+
+        <div class="field">
+          <label for="postAuthor">Display name (optional)</label>
+          <input id="postAuthor" maxlength="60" placeholder="Your preferred display name">
+        </div>
+
+        <div class="field full">
+          <label for="postBody">Your post *</label>
+          <textarea id="postBody" required maxlength="5000"
+            placeholder="Share your experience, route details, recommendations, questions or travel plans…"></textarea>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="primary" id="savePost">Publish locally</button>
+        <button type="button" id="cancelEdit" class="hidden">Cancel edit</button>
+        <button type="reset" id="clearForm">Clear form</button>
+      </div>
+      <p class="muted" style="font-size:.83rem;margin-bottom:0">
+        No account or public publishing is configured in this standalone version.
+      </p>
+    </form>
+  </section>
+
+  <div class="section-heading">
+    <h2>Community board</h2>
+    <div class="form-actions" style="margin:0">
+      <button id="exportButton">Export JSON</button>
+      <button id="importButton">Import JSON</button>
+      <input id="importFile" type="file" accept=".json,application/json" hidden>
+    </div>
+  </div>
+
+  <div class="filters">
+    <input type="search" id="searchInput"
+           placeholder="Search posts, destinations or content…"
+           aria-label="Search community posts">
+    <select id="typeFilter" aria-label="Filter post type">
+      <option value="">All post types</option>
+      <option value="Trip Report">Trip Reports</option>
+      <option value="Route Tip">Route Tips</option>
+      <option value="Destination">Destinations</option>
+      <option value="Question">Questions</option>
+      <option value="Companion Request">Companion Requests</option>
+      <option value="Travel Advice">Travel Advice</option>
+      <option value="Accommodation">Accommodation</option>
+      <option value="Other">Other</option>
+    </select>
+    <select id="styleFilter" aria-label="Filter travel style">
+      <option value="">All travel styles</option>
+      <option value="Motorcycle">Motorcycle</option>
+      <option value="Car">Car</option>
+      <option value="Public Transport">Public Transport</option>
+      <option value="Walking / Hiking">Walking / Hiking</option>
+      <option value="Backpacking">Backpacking</option>
+      <option value="Family Travel">Family Travel</option>
+      <option value="Any">Any</option>
+    </select>
+  </div>
+
+  <div class="community-layout">
+    <section>
+      <div id="posts" class="posts"></div>
+    </section>
+
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <h3>Browse by topic</h3>
+        <div id="categoryLinks"></div>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Plan your next trip</h3>
+        <p class="muted">Use the other OTXS tools to prepare your journey.</p>
+        <p><a href="https://planner.otxs.de">Trip Planner ↗</a></p>
+        <p><a href="https://trip-cost.otxs.de">Trip Cost Calculator ↗</a></p>
+        <p><a href="https://weather.otxs.de">Weather ↗</a></p>
+        <p><a href="https://roads.otxs.de">Road Conditions ↗</a></p>
+        <p><a href="https://local.otxs.de">Local Guide ↗</a></p>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Community guidelines</h3>
+        <ul class="muted" style="padding-left:19px;font-size:.9rem">
+          <li>Share useful and respectful travel advice.</li>
+          <li>Do not publish private contact or identity details without consent.</li>
+          <li>Verify road, weather and access information before relying on it.</li>
+          <li>Meet new travel companions safely in public places.</li>
+          <li>Never treat a post as a verified endorsement.</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <div class="notice warning">
+    <strong>Prototype and privacy notice:</strong> Posts are stored only in this
+    browser and are not shared with other visitors. Do not enter passwords,
+    identity numbers, private addresses or other sensitive information.
+    Companion posts in this version are not sent to anyone.
+  </div>
+</main>
+
+<footer>
+  <strong>OTXS</strong> · Discover and Explore<br>
+  <a href="https://otxs.de">OTXS Home</a> ·
+  <a href="https://apps.otxs.de">Explore all apps</a><br>
+  © <span id="year"></span> OTXS
+</footer>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+
+const STORAGE_KEY = "otxs_travel_community_v1";
+const $ = id => document.getElementById(id);
+
+const postTypes = {
+  "Trip Report": "🧭",
+  "Route Tip": "🛣️",
+  "Destination": "🏞️",
+  "Question": "❓",
+  "Companion Request": "🤝",
+  "Travel Advice": "🎒",
+  "Accommodation": "🏡",
+  "Other": "📍"
+};
+
+let posts = loadPosts();
+let toastTimer;
+
+function makeId() {
+  return window.crypto && crypto.randomUUID
+    ? crypto.randomUUID()
+    : Date.now().toString(36) + Math.random().toString(36).slice(2);
+}
+
+function loadPosts() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return [];
+    const data = JSON.parse(raw);
+    return Array.isArray(data)
+      ? data.filter(p => p && typeof p === "object" && p.id && p.title)
+      : [];
+  } catch (error) {
+    console.error("Could not load community posts:", error);
+    return [];
+  }
+}
+
+function savePosts() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+    return true;
+  } catch (error) {
+    showToast("Unable to save. Browser storage may be full or unavailable.");
+    console.error(error);
+    return false;
+  }
+}
+
+function showToast(message) {
+  const toast = $("toast");
+  toast.textContent = message;
+  toast.style.display = "block";
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.style.display = "none", 3000);
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[ch]);
+}
+
+function safeDate(value) {
+  if (!value) return "";
+  const date = new Date(value + (value.length === 10 ? "T12:00:00" : ""));
+  return Number.isNaN(date.getTime())
+    ? ""
+    : date.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+}
+
+function formatTimestamp(value) {
+  if (!value) return "Date unknown";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "Date unknown";
+  return date.toLocaleDateString(undefined, {
+    year: "numeric", month: "short", day: "numeric"
+  });
+}
+
+function filteredPosts() {
+  const query = $("searchInput").value.trim().toLowerCase();
+  const type = $("typeFilter").value;
+  const style = $("styleFilter").value;
+
+  return posts.filter(post => {
+    const searchable = [
+      post.title, post.type, post.destination, post.travelStyle,
+      post.author, post.body, post.travelDate
+    ].join(" ").toLowerCase();
+
+    return (!query || searchable.includes(query)) &&
+      (!type || post.type === type) &&
+      (!style || post.travelStyle === style);
+  }).sort((a, b) => {
+    return new Date(b.updatedAt || b.createdAt || 0) -
+           new Date(a.updatedAt || a.createdAt || 0);
+  });
+}
+
+function renderStats() {
+  $("postCount").textContent = `${posts.length} ${posts.length === 1 ? "post" : "posts"}`;
+  $("storyCount").textContent = posts.filter(p => p.type === "Trip Report").length;
+  $("tipCount").textContent = posts.filter(p => p.type === "Route Tip").length;
+  $("companionCount").textContent = posts.filter(p => p.type === "Companion Request").length;
+}
+
+function renderCategories() {
+  const counts = {};
+  Object.keys(postTypes).forEach(type => counts[type] = 0);
+  posts.forEach(post => {
+    if (Object.hasOwn(counts, post.type)) counts[post.type]++;
+  });
+
+  $("categoryLinks").innerHTML = Object.keys(postTypes).map(type => `
+    <div class="category-link" role="button" tabindex="0"
+         data-type="${escapeHTML(type)}" aria-label="Filter by ${escapeHTML(type)}">
+      <span>${postTypes[type]} ${escapeHTML(type)}</span>
+      <span>${counts[type]}</span>
+    </div>
+  `).join("");
+}
+
+function renderPosts() {
+  renderStats();
+  renderCategories();
+
+  const container = $("posts");
+  const results = filteredPosts();
+
+  if (!results.length) {
+    container.innerHTML = `
+      <div class="empty">
+        <div style="font-size:2.2rem">🌄</div>
+        <h3>No posts found</h3>
+        <p>Try another filter or create your first travel post.</p>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = results.map(post => {
+    const type = postTypes[post.type] ? post.type : "Other";
+    const title = escapeHTML(post.title);
+    const destination = escapeHTML(post.destination || "Destination not specified");
+    const author = escapeHTML(post.author || "Traveller");
+    const body = escapeHTML(post.body || "");
+    const style = escapeHTML(post.travelStyle || "Any");
+    const travelDate = safeDate(post.travelDate);
+    const created = formatTimestamp(post.createdAt);
+    const updated = post.updatedAt && post.updatedAt !== post.createdAt
+      ? ` · Updated ${formatTimestamp(post.updatedAt)}`
+      : "";
+
+    const mapQuery = encodeURIComponent(post.destination || post.title);
+    const mapUrl = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+
+    return `
+      <article class="post">
+        <div class="post-header">
+          <div>
+            <span class="tag">${postTypes[type]} ${escapeHTML(type)}</span>
+            <div class="post-title">${title}</div>
+          </div>
+          <div class="post-icon" aria-hidden="true">${postTypes[type]}</div>
+        </div>
+
+        <div class="post-meta">
+          By ${author} · Posted ${escapeHTML(created)}${escapeHTML(updated)}
+        </div>
+
+        <div class="post-body">${body}</div>
+
+        <div class="post-location">
+          📍 ${destination}<br>
+          <span class="muted">Travel style: ${style}</span>
+          ${travelDate ? `<br><span class="muted">Travel date: ${escapeHTML(travelDate)}</span>` : ""}
+        </div>
+
+        <div class="post-actions">
+          <a class="btn" href="${mapUrl}" target="_blank" rel="noopener noreferrer">Explore location ↗</a>
+          <button type="button" data-action="edit" data-id="${escapeHTML(post.id)}">Edit</button>
+          <button type="button" class="danger" data-action="delete" data-id="${escapeHTML(post.id)}">Delete</button>
+        </div>
+      </article>`;
+  }).join("");
+}
+
+function resetForm() {
+  $("postForm").reset();
+  $("postId").value = "";
+  $("formHeading").textContent = "Create a community post";
+  $("savePost").textContent = "Publish locally";
+  $("cancelEdit").classList.add("hidden");
+}
+
+function editPost(id) {
+  const post = posts.find(p => p.id === id);
+  if (!post) return;
+
+  $("postId").value = post.id;
+  $("postTitle").value = post.title || "";
+  $("postType").value = Object.hasOwn(postTypes, post.type) ? post.type : "Other";
+  $("postDestination").value = post.destination || "";
+  $("postTravelStyle").value = post.travelStyle || "Any";
+  $("postDate").value = post.travelDate || "";
+  $("postAuthor").value = post.author || "";
+  $("postBody").value = post.body || "";
+
+  $("formHeading").textContent = "Edit community post";
+  $("savePost").textContent = "Save changes";
+  $("cancelEdit").classList.remove("hidden");
+  $("create-post").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function deletePost(id) {
+  const post = posts.find(p => p.id === id);
+  if (!post) return;
+
+  if (!confirm(`Delete "${post.title}" from this browser?`)) return;
+
+  posts = posts.filter(p => p.id !== id);
+  if (savePosts()) {
+    renderPosts();
+    showToast("Post deleted.");
+  }
+}
+
+$("postForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  const title = $("postTitle").value.trim();
+  const destination = $("postDestination").value.trim();
+  const body = $("postBody").value.trim();
+
+  if (!title || !destination || !body) {
+    showToast("Please fill in the title, destination and post content.");
+    return;
+  }
+
+  const id = $("postId").value;
+  const existing = posts.find(p => p.id === id);
+
+  const post = {
+    id: id || makeId(),
+    title,
+    type: $("postType").value,
+    destination,
+    travelStyle: $("postTravelStyle").value,
+    travelDate: $("postDate").value,
+    author: $("postAuthor").value.trim(),
+    body,
+    createdAt: existing?.createdAt || new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  };
+
+  if (existing) {
+    posts = posts.map(p => p.id === id ? post : p);
+  } else {
+    posts.push(post);
+  }
+
+  if (savePosts()) {
+    renderPosts();
+    resetForm();
+    showToast(existing ? "Post updated locally." : "Post saved locally.");
+  }
+});
+
+$("cancelEdit").addEventListener("click", resetForm);
+$("clearForm").addEventListener("click", () => setTimeout(resetForm, 0));
+
+$("posts").addEventListener("click", event => {
+  const button = event.target.closest("button[data-action]");
+  if (!button) return;
+
+  if (button.dataset.action === "edit") editPost(button.dataset.id);
+  if (button.dataset.action === "delete") deletePost(button.dataset.id);
+});
+
+$("categoryLinks").addEventListener("click", event => {
+  const item = event.target.closest("[data-type]");
+  if (!item) return;
+  $("typeFilter").value = item.dataset.type;
+  renderPosts();
+  $("posts").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+$("categoryLinks").addEventListener("keydown", event => {
+  if (event.key !== "Enter" && event.key !== " ") return;
+  const item = event.target.closest("[data-type]");
+  if (!item) return;
+  event.preventDefault();
+  $("typeFilter").value = item.dataset.type;
+  renderPosts();
+  $("posts").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+["searchInput", "typeFilter", "styleFilter"].forEach(id => {
+  $(id).addEventListener(id === "searchInput" ? "input" : "change", renderPosts);
+});
+
+$("appNav").addEventListener("change", event => {
+  if (event.target.value) window.location.href = event.target.value;
+});
+
+$("exportButton").addEventListener("click", () => {
+  const backup = {
+    app: "OTXS Travel Community",
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    posts
+  };
+
+  const blob = new Blob([JSON.stringify(backup, null, 2)], {
+    type: "application/json"
+  });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "otxs-community-backup.json";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+  showToast("Community backup exported.");
+});
+
+$("importButton").addEventListener("click", () => $("importFile").click());
+
+$("importFile").addEventListener("change", async event => {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+
+  try {
+    const parsed = JSON.parse(await file.text());
+    const incoming = Array.isArray(parsed) ? parsed : parsed.posts;
+
+    if (!Array.isArray(incoming)) {
+      throw new Error("No posts list was found in this JSON file.");
+    }
+
+    const cleaned = incoming
+      .filter(p => p && typeof p === "object" &&
+        typeof p.title === "string" &&
+        typeof p.destination === "string" &&
+        typeof p.body === "string")
+      .map(p => ({
+        id: String(p.id || makeId()),
+        title: p.title.slice(0, 120),
+        type: Object.hasOwn(postTypes, p.type) ? p.type : "Other",
+        destination: p.destination.slice(0, 150),
+        travelStyle: ["Any", "Motorcycle", "Car", "Public Transport",
+          "Walking / Hiking", "Backpacking", "Family Travel"].includes(p.travelStyle)
+          ? p.travelStyle : "Any",
+        travelDate: /^\d{4}-\d{2}-\d{2}$/.test(p.travelDate || "") ? p.travelDate : "",
+        author: String(p.author || "").slice(0, 60),
+        body: p.body.slice(0, 5000),
+        createdAt: p.createdAt || new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      }));
+
+    if (!cleaned.length) throw new Error("No valid posts were found.");
+
+    const replace = confirm(
+      `Found ${cleaned.length} post(s).\n\n` +
+      "Choose OK to replace your current posts.\n" +
+      "Choose Cancel to merge them with your current posts."
+    );
+
+    if (replace) {
+      posts = cleaned;
+    } else {
+      const ids = new Set(posts.map(p => p.id));
+      const unique = cleaned.map(p => {
+        if (ids.has(p.id)) p.id = makeId();
+        ids.add(p.id);
+        return p;
+      });
+      posts = posts.concat(unique);
+    }
+
+    if (savePosts()) {
+      renderPosts();
+      showToast("Backup imported.");
+    }
+  } catch (error) {
+    alert("Import failed: " + error.message);
+  } finally {
+    event.target.value = "";
+  }
+});
+
+$("year").textContent = new Date().getFullYear();
+renderPosts();
+</script>
+</body>
+</html>
+
